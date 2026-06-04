@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>WebVR Video 360 Degree</title>
-    <script src="assets/7900775667437.mp4"></script>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <style>
       #play-btn {
         position: fixed;
@@ -12,29 +12,30 @@
         left: 50%;
         transform: translateX(-50%);
         z-index: 9999;
-        padding: 12px 24px;
-        background-color: #ff4757;
-        color: white;
+        padding: 15px 30px;
+        background-color: #00ec47;
+        color: black;
         border: none;
         border-radius: 25px;
-        font-size: 16px;
+        font-size: 18px;
         font-weight: bold;
         cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
       }
     </style>
   </head>
   <body style="margin: 0px; overflow: hidden;">
 
-    <button id="play-btn">Bấm để xem Video 360°</button>
+    <button id="play-btn">CHẠM VÀO ĐÂY ĐỂ XEM VIDEO</button>
     
-    <a-scene vr-mode-ui="enabled: true">
+    <a-scene vr-mode-ui="enabled: true" crossorigin="anonymous">
       
-      <a-assets>
+      <a-assets timeout="10000">
         <video id="video-360" 
                src="./7900775667437.mp4" 
                autoplay="true" 
                loop="true" 
+               muted="true"
                crossorigin="anonymous" 
                playsinline 
                webkit-playsinline>
@@ -52,8 +53,18 @@
       const video = document.getElementById('video-360');
 
       button.addEventListener('click', function() {
-        video.play();
-        button.style.display = 'none';
+        video.muted = false;
+        video.play().then(() => {
+          button.style.display = 'none';
+        }).catch(err => {
+          console.log("Lỗi phát video:", err);
+          video.play();
+          button.style.display = 'none';
+        });
+      });
+
+      document.addEventListener('DOMContentLoaded', () => {
+        video.load();
       });
     </script>
   </body>

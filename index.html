@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>WebVR Video 360 Degree</title>
-    <script src="assets/7900775667437.mp4"></script>
+
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <style>
       #play-btn {
         position: fixed;
@@ -31,8 +32,9 @@
     <a-scene vr-mode-ui="enabled: true" crossorigin="anonymous">
       
       <a-assets timeout="10000">
+  
         <video id="video-360" 
-               src="./7900775667437.mp4" 
+               src="./assets/7900775667437.mp4" 
                autoplay="true" 
                loop="true" 
                muted="true"
